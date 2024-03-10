@@ -33,10 +33,8 @@ Make sure you have the following installed on your machine:
     docker run -p <port_number>:3000 -d <docker_image_name>
     ```
 
-Now, you should be able to access your React app at:
-    ```bash
-    http://localhost:<port_number>/
-    ```
+Now, you should be able to access your React app at: http://localhost:<port_number>/
+    
 
 ## Additional Information
 
