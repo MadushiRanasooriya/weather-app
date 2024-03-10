@@ -66,8 +66,3 @@ Now, you should be able to access your React app at:
 
 - For HTTPS support, update the Dockerfile to include SSL configurations.
 
-## Contributing
-
-Feel free to contribute by submitting issues or pull requests.
-
-Happy coding!
