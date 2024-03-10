@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 # Set the working directory in the container
-WORKDIR /weather
+WORKDIR /weather-app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
