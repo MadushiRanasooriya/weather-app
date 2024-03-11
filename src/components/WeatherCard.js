@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDateandTime, getTime, capitalizeEachWord } from '../functions/functions';
+import { formatDateandTime, formatTime, capitalizeEachWord } from '../functions/functions';
 import checkWeatherCache from '../functions/checkWeatherCache';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 
@@ -12,7 +12,7 @@ const WeatherCard = ({ cityWeather, index, cityCodes, cacheExpireTime, setWeathe
 
     const handleClick = () => {
         checkWeatherCache(cityCodes, cacheExpireTime, setWeatherReport);
-        navigate(`/view-weather/${cityWeather.id}`, { state: { weatherData: cityWeather, backgroundColor: backgroundColor } });
+        navigate(`/view-weather/${cityWeather.name}`, { state: { weatherData: cityWeather, backgroundColor: backgroundColor } });
     }
 
 
@@ -21,7 +21,7 @@ const WeatherCard = ({ cityWeather, index, cityCodes, cacheExpireTime, setWeathe
             <div className='row'>
                 <div className='column'>
                     <p className='city'>{cityWeather.name}, {cityWeather.sys.country}</p>
-                    <p className='date'>{getDateandTime(cityWeather.dt, cityWeather.sys.timezone)}</p>
+                    <p className='date'>{formatDateandTime(cityWeather.dt, cityWeather.sys.timezone)}</p>
                     <p className='descrip'>
                         <img src={iconLink} alt="Weather Icon" />
                         <span className='descrip-text'>
@@ -49,8 +49,8 @@ const WeatherCard = ({ cityWeather, index, cityCodes, cacheExpireTime, setWeathe
                     </div>
                 </div>
                 <div className='column'>
-                    <p>{`Sunrise: ${getTime(cityWeather.sys.sunrise, cityWeather.sys.timezone)}`}</p>
-                    <p>{`Sunset: ${getTime(cityWeather.sys.sunset, cityWeather.sys.timezone)}`}</p>
+                    <p>{`Sunrise: ${formatTime(cityWeather.sys.sunrise, cityWeather.sys.timezone)}`}</p>
+                    <p>{`Sunset: ${formatTime(cityWeather.sys.sunset, cityWeather.sys.timezone)}`}</p>
                 </div>
             </div>
         </div>

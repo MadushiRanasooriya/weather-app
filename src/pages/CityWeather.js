@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getDateandTime, getTime, capitalizeEachWord } from '../functions/functions';
+import { formatDateandTime , formatTime, capitalizeEachWord } from '../functions/functions';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudSun, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -27,7 +27,7 @@ const CityWeather = () => {
                     <div className='row'>
                         <div className='column'>
                             <h3 className='city'>{weatherData.name}, {weatherData.sys.country}</h3>
-                            <p className='date'>{getDateandTime(weatherData.dt, weatherData.sys.timezone)}</p>
+                            <p className='date'>{formatDateandTime(weatherData.dt, weatherData.sys.timezone)}</p>
                         </div>
                     </div>
                     <div className='row'>
@@ -59,8 +59,8 @@ const CityWeather = () => {
                             </div>
                         </div>
                         <div className='column'>
-                            <p>{`Sunrise: ${getTime(weatherData.sys.sunrise, weatherData.sys.timezone)}`}</p>
-                            <p>{`Sunset: ${getTime(weatherData.sys.sunset, weatherData.sys.timezone)}`}</p>
+                            <p>{`Sunrise: ${formatTime(weatherData.sys.sunrise, weatherData.sys.timezone)}`}</p>
+                            <p>{`Sunset: ${formatTime(weatherData.sys.sunset, weatherData.sys.timezone)}`}</p>
                         </div>
                     </div>
                 </div>

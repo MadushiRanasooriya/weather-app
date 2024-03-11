@@ -1,16 +1,16 @@
-export const getDateandTime = (timestamp, timeZone) => {
+export const formatDateandTime = (timestamp, timeZone) => {
     const date = new Date((timestamp + timeZone) * 1000);
     const dateOptions = {
         month: 'short',
         day: 'numeric',
         timeZone: 'UTC'
     }
-    const formattedTime = getTime(timestamp, timeZone);
+    const formattedTime = formatTime(timestamp, timeZone);
     const formattedDate = date.toLocaleString('en-US', dateOptions);
     return `${formattedTime}, ${formattedDate}`;
 }
 
-export const getTime = (timestamp, timeZone) => {
+export const formatTime = (timestamp, timeZone) => {
     const date = new Date((timestamp + timeZone) * 1000);
     const timeOptions = {
         hour: 'numeric',
