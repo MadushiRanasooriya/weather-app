@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element = {<Weather />} />
-        <Route path='/view-weather/:id' element = {<CityWeather />} />
+        <Route path='/view-weather/:name' element = {<CityWeather />} />
       </Routes>
     </Router>
   );
