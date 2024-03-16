@@ -1,6 +1,8 @@
+import appSettings from '../appSettings.json';
+
 export const getWeatherData = async (cityCodes) => {
     try {
-        const apiKey = '55a0b1c4c73ef41239bc2552928205b0';
+        const apiKey = appSettings.apiKey;
         const apiUrl = `https://api.openweathermap.org/data/2.5/group?id=${cityCodes}&units=metric&appid=${apiKey}`;
 
         const response = await fetch(apiUrl);
