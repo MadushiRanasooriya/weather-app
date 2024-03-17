@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import cities from '../cities.json';
 import WeatherCard from '../components/WeatherCard';
 import checkWeatherCache from '../functions/checkWeatherCache'
-import "../styles.css";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { cacheExpireTime } from '../constants';
+import "../styles.css";
 
 const Weather = () => {
     const [cityData, setCityData] = useState([]);

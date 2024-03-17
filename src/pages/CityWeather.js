@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import "../styles.css";
 import CityWeatherCard from '../components/CityWeatherCard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import "../styles.css";
 
 const CityWeather = () => {
     const location = useLocation();

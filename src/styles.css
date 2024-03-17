@@ -62,7 +62,6 @@
 
 .weather-card {
     width: 45%;
-    /*width: calc(45% - 5%);*/
     height: 350px;
     cursor: pointer;
     color: aliceblue;
