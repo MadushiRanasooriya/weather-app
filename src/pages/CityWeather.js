@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import CityWeatherCard from '../components/CityWeatherCard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,19 +7,15 @@ import "../styles.css";
 
 const CityWeather = () => {
     const location = useLocation();
-    const navigate = useNavigate();
     const weatherData = location.state.weatherData;
     const colorIndex = location.state.colorIndex;
 
-    const handleClick = () => {
-        navigate('/');
-    }
     return (
         <>
             <div className='weather-container'>
                 <Header />
                 <div className='weather'>
-                    <CityWeatherCard weatherData={weatherData} handleClick={handleClick} colorIndex={colorIndex} />
+                    <CityWeatherCard weatherData={weatherData} colorIndex={colorIndex} />
                 </div>
             </div>
             <Footer />

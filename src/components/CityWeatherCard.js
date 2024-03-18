@@ -3,9 +3,15 @@ import { formatDateandTime , formatTime, capitalizeEachWord } from '../functions
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
-const CityWeatherCard = ({weatherData, handleClick, colorIndex}) => {
+const CityWeatherCard = ({weatherData, colorIndex}) => {
     const iconLink = 'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '.png';
+    const navigate = useNavigate();
+    
+    const handleClick = () => {
+        navigate('/');
+    }
 
     return (
         <div className={`city-weather-card card-${colorIndex}`}>
