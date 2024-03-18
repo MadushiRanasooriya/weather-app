@@ -145,11 +145,6 @@
     border-right: 1px solid #fff;
 }
 
-.weather-card .row:first-child .column {
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
-
 .weather-card .row:last-child {
     padding: 20px;
 }
@@ -215,11 +210,11 @@
     align-items: center; 
   }
 
-  .descript-content {
+.descript-content {
     display: flex;
     align-items: center;
     flex-direction: column;
-  }
+}
   
 .weather-card .descrip-text {
     display: flex;
