@@ -1,9 +1,8 @@
-import appSettings from '../appSettings.json';
+import { API_BASE_URL, UNITS_METRIC, API_KEY_PARAM } from "../constants/constants";
 
-export const getWeatherData = async (cityCodes) => {
+export const weatherApiService = async (cityCodes) => {
     try {
-        const apiKey = appSettings.apiKey;
-        const apiUrl = `https://api.openweathermap.org/data/2.5/group?id=${cityCodes}&units=metric&appid=${apiKey}`;
+        const apiUrl = `${API_BASE_URL}${cityCodes}${UNITS_METRIC}${API_KEY_PARAM}${process.env.REACT_APP_API_KEY}`;
 
         const response = await fetch(apiUrl);
 

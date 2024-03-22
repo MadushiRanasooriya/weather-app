@@ -1,12 +1,14 @@
 import React from 'react';
-import { formatDateandTime, formatTime, capitalizeEachWord } from '../functions/functions';
+import { formatDateAndTime, formatTime } from '../utils/dateAndTimeUtils';
+import { capitalizeEachWord } from '../utils/stringUtils';
+import { ICON_BASE_URL, ICON_FILE_EXTENSION } from '../constants/constants';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const CityWeatherCard = ({ weatherData, colorIndex }) => {
-    const iconLink = 'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '.png';
+    const iconLink = ICON_BASE_URL + weatherData.weather[0].icon + ICON_FILE_EXTENSION;
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -21,7 +23,7 @@ const CityWeatherCard = ({ weatherData, colorIndex }) => {
             <div className='row'>
                 <div className='column'>
                     <h3 className='city'>{weatherData.name}, {weatherData.sys.country}</h3>
-                    <p className='date'>{formatDateandTime(weatherData.dt, weatherData.sys.timezone)}</p>
+                    <p className='date'>{formatDateAndTime(weatherData.dt, weatherData.sys.timezone)}</p>
                 </div>
             </div>
             <div className='row'>

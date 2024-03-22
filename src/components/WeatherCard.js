@@ -1,18 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { formatDateandTime, formatTime, capitalizeEachWord } from '../functions/functions';
-import checkWeatherCache from '../functions/checkWeatherCache';
+import { formatDateAndTime, formatTime } from '../utils/dateAndTimeUtils';
+import { capitalizeEachWord } from '../utils/stringUtils';
+import { ICON_BASE_URL, ICON_FILE_EXTENSION } from '../constants/constants';
+import { manageWeatherCache } from '../services/manageWeatherCache';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { cacheExpireTime } from '../constants';
 
 const WeatherCard = ({ cityWeather, index, cityCodes, setWeatherReport }) => {
     const navigate = useNavigate();
-    const iconLink = 'https://openweathermap.org/img/wn/' + cityWeather.weather[0].icon + '.png';
+    const iconLink = ICON_BASE_URL + cityWeather.weather[0].icon + ICON_FILE_EXTENSION;
 
     const handleClick = () => {
-        checkWeatherCache(cityCodes, cacheExpireTime, setWeatherReport);
+        manageWeatherCache(cityCodes, setWeatherReport);
         navigate(`/view-weather/${cityWeather.name}`, { state: { weatherData: cityWeather, colorIndex: index % 5 } });
     }
 
@@ -29,7 +30,7 @@ const WeatherCard = ({ cityWeather, index, cityCodes, setWeatherReport }) => {
             <div className='row' onClick={handleClick}>
                 <div className='column'>
                     <p className='city'>{cityWeather.name}, {cityWeather.sys.country}</p>
-                    <p className='date'>{formatDateandTime(cityWeather.dt, cityWeather.sys.timezone)}</p>
+                    <p className='date'>{formatDateAndTime(cityWeather.dt, cityWeather.sys.timezone)}</p>
                     <p className='descrip'>
                         <img src={iconLink} alt="Weather Icon" />
                         <span className='descrip-text'>

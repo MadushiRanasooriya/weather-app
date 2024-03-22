@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import cities from '../cities.json';
+import cities from '../assets/data/cities.json';
 import WeatherCard from '../components/WeatherCard';
-import checkWeatherCache from '../functions/checkWeatherCache'
+import { manageWeatherCache } from '../services/manageWeatherCache';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { cacheExpireTime } from '../constants';
-import "../styles.css";
+import "../styles/Styles.css";
 
 const Weather = () => {
     const [cityData, setCityData] = useState([]);
@@ -19,7 +18,7 @@ const Weather = () => {
     useEffect(() => {
         const cityCodes = cityData.map(data => data.CityCode).join(',');
         if (cityCodes.length > 0) {
-            checkWeatherCache(cityCodes, cacheExpireTime, setWeatherReport);
+            manageWeatherCache(cityCodes, setWeatherReport);
         }
     }, [cityData]);
 

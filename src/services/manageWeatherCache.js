@@ -1,4 +1,5 @@
-import { getWeatherData } from './getWeatherData';
+import { weatherApiService } from './weatherApiService';
+import {CACHE_EXPIRE_TIME} from '../constants/constants';
 
 const deleteCache = (expireTime) => {
     setTimeout(() => {
@@ -8,7 +9,12 @@ const deleteCache = (expireTime) => {
     }, expireTime);
 }
 
-const checkWeatherCache = async (cityCodes, cacheExpireTime, setWeatherReport) => {
+const addToCache = (weatherData, currentTime) => {
+    localStorage.setItem('cachedWeatherData', JSON.stringify(weatherData));
+    localStorage.setItem('cachedTimestamp', currentTime.toString());
+}
+
+export const manageWeatherCache = async (cityCodes, setWeatherReport) => {
     const cachedWeatherData = localStorage.getItem('cachedWeatherData');
     const cachedTimestamp = localStorage.getItem('cachedTimestamp');
 
@@ -16,13 +22,13 @@ const checkWeatherCache = async (cityCodes, cacheExpireTime, setWeatherReport) =
         const currentTime = new Date().getTime();
         const timeSinceStored = currentTime - parseInt(cachedTimestamp, 10);
 
-        if (timeSinceStored <= cacheExpireTime * 60 * 1000) {
+        if (timeSinceStored <= CACHE_EXPIRE_TIME ) {
             try {
                 const weatherData = JSON.parse(cachedWeatherData);
                 setWeatherReport(weatherData);
                 console.log('Cached weather data used');
 
-                deleteCache(cacheExpireTime * 60 * 1000 - timeSinceStored);
+                deleteCache(CACHE_EXPIRE_TIME - timeSinceStored);
 
             } catch (error) {
                 console.log('Error getting cached data: ', error);
@@ -33,29 +39,25 @@ const checkWeatherCache = async (cityCodes, cacheExpireTime, setWeatherReport) =
             localStorage.removeItem('cachedTimestamp');
             console.log('Cache Expired. (Deleted remaining cache)');
 
-            const weatherData = await getWeatherData(cityCodes);
+            const weatherData = await weatherApiService(cityCodes);
             if (weatherData !== null) {
                 setWeatherReport(weatherData);
                 const currentTime = new Date().getTime();
-                localStorage.setItem('cachedWeatherData', JSON.stringify(weatherData));
-                localStorage.setItem('cachedTimestamp', currentTime.toString());
+                addToCache(weatherData, currentTime);
                 console.log('Weather data stored in cache');
             }
-            deleteCache(cacheExpireTime * 60 * 1000);
+            deleteCache(CACHE_EXPIRE_TIME);
         }
     }
     else {
-        const weatherData = await getWeatherData(cityCodes);
+        const weatherData = await weatherApiService(cityCodes);
         if (weatherData !== null) {
             setWeatherReport(weatherData);
             const currentTime = new Date().getTime();
-            localStorage.setItem('cachedWeatherData', JSON.stringify(weatherData));
-            localStorage.setItem('cachedTimestamp', currentTime.toString());
+            addToCache(weatherData, currentTime);
             console.log('Weather data stored in cache');
 
-            deleteCache(cacheExpireTime * 60 * 1000);
+            deleteCache(CACHE_EXPIRE_TIME);
         }
     }
 }
-
-export default checkWeatherCache;

@@ -1,4 +1,4 @@
-export const formatDateandTime = (timestamp, timeZone) => {
+export const formatDateAndTime = (timestamp, timeZone) => {
     const date = new Date((timestamp + timeZone) * 1000);
     const dateOptions = {
         month: 'short',
@@ -20,7 +20,3 @@ export const formatTime = (timestamp, timeZone) => {
     const formattedTime = date.toLocaleString('en-US', timeOptions);
     return `${formattedTime.toLowerCase()}`;
 }
-
-export const capitalizeEachWord = (string) => {
-    return string.replace(/\b\w/g, (match) => match.toUpperCase());
-};

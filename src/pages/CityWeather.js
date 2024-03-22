@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import CityWeatherCard from '../components/CityWeatherCard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import "../styles.css";
+import "../styles/Styles.css";
 
 const CityWeather = () => {
     const location = useLocation();
