@@ -10,7 +10,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const WeatherCard = ({ cityWeatherData, index, cityCodes, setWeatherReport }) => {
     const navigate = useNavigate();
-    const iconLink = ICON_BASE_URL + cityWeatherData.weather[0].icon + ICON_FILE_EXTENSION;
+    const ICON_LINK = ICON_BASE_URL + cityWeatherData.weather[0].icon + ICON_FILE_EXTENSION;
     const colorIndex = index % 5;
 
     const handleClick = () => {
@@ -33,7 +33,7 @@ const WeatherCard = ({ cityWeatherData, index, cityCodes, setWeatherReport }) =>
                     <p className='city'>{cityWeatherData.name}, {cityWeatherData.sys.country}</p>
                     <p className='date'>{formatDateAndTime(cityWeatherData.dt, cityWeatherData.sys.timezone)}</p>
                     <p className='descrip'>
-                        <img src={iconLink} alt="Weather Icon" />
+                        <img src={ICON_LINK} alt="Weather Icon" />
                         <span className='descrip-text'>
                             {capitalizeEachWord(cityWeatherData.weather[0].description)}
                         </span>

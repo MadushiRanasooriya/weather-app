@@ -8,7 +8,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const CityWeatherCard = ({ cityWeatherData, colorIndex }) => {
-    const iconLink = ICON_BASE_URL + cityWeatherData.weather[0].icon + ICON_FILE_EXTENSION;
+    const ICON_LINK = ICON_BASE_URL + cityWeatherData.weather[0].icon + ICON_FILE_EXTENSION;
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -30,7 +30,7 @@ const CityWeatherCard = ({ cityWeatherData, colorIndex }) => {
                 <div className='column'>
                     <div className='descrip'>
                         <p className='descript-content'>
-                            <img src={iconLink} alt="Weather Icon" />
+                            <img src={ICON_LINK} alt="Weather Icon" />
                             {capitalizeEachWord(cityWeatherData.weather[0].description)}
                         </p>
                     </div>
