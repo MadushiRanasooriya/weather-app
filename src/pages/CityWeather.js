@@ -7,7 +7,7 @@ import "../styles/Styles.css";
 
 const CityWeather = () => {
     const location = useLocation();
-    const weatherData = location.state.weatherData;
+    const cityWeatherData = location.state.cityWeatherData;
     const colorIndex = location.state.colorIndex;
 
     return (
@@ -15,7 +15,7 @@ const CityWeather = () => {
             <div className='weather-container'>
                 <Header />
                 <div className='weather'>
-                    <CityWeatherCard weatherData={weatherData} colorIndex={colorIndex} />
+                    <CityWeatherCard cityWeatherData={cityWeatherData} colorIndex={colorIndex} />
                 </div>
             </div>
             <Footer />

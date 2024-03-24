@@ -8,13 +8,14 @@ import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const WeatherCard = ({ cityWeather, index, cityCodes, setWeatherReport }) => {
+const WeatherCard = ({ cityWeatherData, index, cityCodes, setWeatherReport }) => {
     const navigate = useNavigate();
-    const iconLink = ICON_BASE_URL + cityWeather.weather[0].icon + ICON_FILE_EXTENSION;
+    const iconLink = ICON_BASE_URL + cityWeatherData.weather[0].icon + ICON_FILE_EXTENSION;
+    const colorIndex = index % 5;
 
     const handleClick = () => {
         manageWeatherCache(cityCodes, setWeatherReport);
-        navigate(`/view-weather/${cityWeather.name}`, { state: { weatherData: cityWeather, colorIndex: index % 5 } });
+        navigate(`/view-weather/${cityWeatherData.name}`, { state: { cityWeatherData: cityWeatherData, colorIndex: colorIndex } });
     }
 
     const handleClose = () => {
@@ -23,43 +24,43 @@ const WeatherCard = ({ cityWeather, index, cityCodes, setWeatherReport }) => {
 
 
     return (
-        <div className={`weather-card card-${index % 5}`} >
+        <div className={`weather-card card-${colorIndex}`} >
             <div className='row'>
                 <p onClick={handleClose}><FontAwesomeIcon icon={faXmark} /></p>
             </div>
             <div className='row' onClick={handleClick}>
                 <div className='column'>
-                    <p className='city'>{cityWeather.name}, {cityWeather.sys.country}</p>
-                    <p className='date'>{formatDateAndTime(cityWeather.dt, cityWeather.sys.timezone)}</p>
+                    <p className='city'>{cityWeatherData.name}, {cityWeatherData.sys.country}</p>
+                    <p className='date'>{formatDateAndTime(cityWeatherData.dt, cityWeatherData.sys.timezone)}</p>
                     <p className='descrip'>
                         <img src={iconLink} alt="Weather Icon" />
                         <span className='descrip-text'>
-                            {capitalizeEachWord(cityWeather.weather[0].description)}
+                            {capitalizeEachWord(cityWeatherData.weather[0].description)}
                         </span>
                     </p>
                 </div>
                 <div className='column'>
-                    <p className='temp'>{`${(cityWeather.main.temp).toFixed(0)}°c`}</p>
-                    <p className='temp-range'>{`Temp Min: ${(cityWeather.main.temp_min).toFixed(0)}°c`}</p>
-                    <p className='temp-range'>{`Temp Max: ${(cityWeather.main.temp_max).toFixed(0)}°c`}</p>
+                    <p className='temp'>{`${(cityWeatherData.main.temp).toFixed(0)}°c`}</p>
+                    <p className='temp-range'>{`Temp Min: ${(cityWeatherData.main.temp_min).toFixed(0)}°c`}</p>
+                    <p className='temp-range'>{`Temp Max: ${(cityWeatherData.main.temp_max).toFixed(0)}°c`}</p>
                     <br/><br/>
                 </div>
             </div>
             <div className='row bottom' onClick={handleClick}>
                 <div className='column'>
-                    <p>{`Pressure: ${cityWeather.main.pressure}hPa`}</p>
-                    <p>{`Humidity: ${cityWeather.main.humidity}%`}</p>
-                    <p>{`Visibility: ${(cityWeather.visibility / 1000).toFixed(1)}km`}</p>
+                    <p>{`Pressure: ${cityWeatherData.main.pressure}hPa`}</p>
+                    <p>{`Humidity: ${cityWeatherData.main.humidity}%`}</p>
+                    <p>{`Visibility: ${(cityWeatherData.visibility / 1000).toFixed(1)}km`}</p>
                 </div>
                 <div className='column'>
                     <div className='wind'>
                         <NearMeOutlinedIcon  />
-                        <p>{`${(cityWeather.wind.speed).toFixed(1)}m/s ${cityWeather.wind.deg} Degree`}</p>
+                        <p>{`${(cityWeatherData.wind.speed).toFixed(1)}m/s ${cityWeatherData.wind.deg} Degree`}</p>
                     </div>
                 </div>
                 <div className='column'>
-                    <p>{`Sunrise: ${formatTime(cityWeather.sys.sunrise, cityWeather.sys.timezone)}`}</p>
-                    <p>{`Sunset: ${formatTime(cityWeather.sys.sunset, cityWeather.sys.timezone)}`}</p>
+                    <p>{`Sunrise: ${formatTime(cityWeatherData.sys.sunrise, cityWeatherData.sys.timezone)}`}</p>
+                    <p>{`Sunset: ${formatTime(cityWeatherData.sys.sunset, cityWeatherData.sys.timezone)}`}</p>
                 </div>
             </div>
         </div>

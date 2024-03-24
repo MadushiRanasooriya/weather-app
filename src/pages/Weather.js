@@ -9,6 +9,7 @@ import "../styles/Styles.css";
 const Weather = () => {
     const [cityData, setCityData] = useState([]);
     const [weatherReport, setWeatherReport] = useState([]);
+    const [cityCodes, setCityCodes] = useState('');
 
     useEffect(() => {
         setCityData(cities.List);
@@ -16,11 +17,14 @@ const Weather = () => {
     }, []);
 
     useEffect(() => {
-        const cityCodes = cityData.map(data => data.CityCode).join(',');
+        setCityCodes(cityData.map(data => data.CityCode).join(','));
+    }, [cityData]);
+
+    useEffect(() => {
         if (cityCodes.length > 0) {
             manageWeatherCache(cityCodes, setWeatherReport);
         }
-    }, [cityData]);
+    }, [cityCodes]);
 
 
     return (
@@ -33,12 +37,12 @@ const Weather = () => {
                 </div>
                 <div className='weather'>
                     <div className='weather-cards-container'>
-                    {weatherReport.map((cityWeather, index) => (
+                    {weatherReport.map((cityWeatherData, index) => (
                         <WeatherCard
-                            key={cityWeather.id}
-                            cityWeather={cityWeather}
+                            key={cityWeatherData.id}
+                            cityWeatherData={cityWeatherData}
                             index={index}
-                            cityCodes={cityData.map(data => data.CityCode).join(',')}
+                            cityCodes={cityCodes}
                             setWeatherReport={setWeatherReport} />
                     ))}
                     </div>
